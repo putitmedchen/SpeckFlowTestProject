@@ -85,6 +85,8 @@
     </Compile>
     <Compile Include="pages\VacancyPage.cs" />
     <Compile Include="steps\SearchOnBestbuyFeatureSteps.cs" />
+    <Compile Include="utils\Class1.cs" />
+    <Compile Include="utils\AbstractPegObject.cs" />
     <Compile Include="utils\DriverManager.cs" />
     <Compile Include="steps\FindVacancyFeatureSteps.cs" />
     <Compile Include="steps\Google1520Task2Steps.cs" />

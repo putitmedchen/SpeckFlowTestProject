@@ -23,9 +23,7 @@ namespace UnitTestProject3.pages
 
         [FindsBy(How = How.XPath, Using = ".//*[@id='sr2']/div[2]/a")]
         private IWebElement applyButton;
-
       
-
         [FindsBy(How = How.XPath, Using = "//div[@class='srg']/li")]
         private IList<IWebElement> searchResults;
 
@@ -47,6 +45,8 @@ namespace UnitTestProject3.pages
             allOffices.FindElement(By.Name("Lviv")).Click();
             searchButton.Click();
         }
+
+        
 
     }
 }

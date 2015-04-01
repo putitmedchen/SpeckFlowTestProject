@@ -44,7 +44,6 @@ namespace UnitTestProject3
                 [When(@"I press Apply for")]
         public void WhenIPressApplyFor()
         {
-            //driver.Url("http://jobs.ciklum.com/jobs/automated-qas-for-e-boks/");
             vacancyPage.applyToJob();
 
         }
@@ -52,7 +51,7 @@ namespace UnitTestProject3
                 [Then(@"the result should be Error message  on the form")]
         public void ThenTheResultShouldBeErrorMessageOnTheForm()
         {
-           // ScenarioContext.Current.Pending();
+            vacancyPage.validateError();
         }
     }
 }
