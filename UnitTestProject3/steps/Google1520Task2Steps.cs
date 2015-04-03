@@ -10,7 +10,6 @@ namespace UnitTestProject3
     public class Google1520Task2Steps
     {
 
-
         private GooglePage googlePage;
         private IWebDriver driver;
         private String result;
@@ -29,24 +28,24 @@ namespace UnitTestProject3
             driver.Quit();
         }
 
-        [Given(@"I have entered (.*) into the calculator")]
-        public void GivenIHaveEnteredIntoTheCalculator(string p0)
+        [Given(@"I have entered (.*) into the (.*)")]
+        public void GivenIHaveEnteredIntoTheCalculator(string search, string baseUrl)
         {
-            googlePage.openBaseUrl();
-            googlePage.typeSearch("15*20");
+            googlePage.openBaseUrl(baseUrl);
+            googlePage.typeSearch(search);
             googlePage.submitSearch();
         }
 
-        [Given(@"I have result for multiplying (.*)")]
-        public void GivenIHaveResultForMultiplying(string p0)
+        [Given(@"I recieved result from multiplying")]
+        public void GivenIRecievedResultFromMultiplying()
         {
             result = googlePage.getResult();
         }
 
-        [Given(@"I add result into search line")]
-        public void GivenIAddResultIntoSearchLine()
+        [Given(@"I (.*) result into search line")]
+        public void GivenIAddResultIntoSearchLine(string action )
         {
-            googlePage.typeSearch("+" + result);
+            googlePage.typeSearch(action + result);
         }
 
         [When(@"I press search")]
@@ -54,12 +53,10 @@ namespace UnitTestProject3
         {
             googlePage.submitSearch();
         }
-        [Then(@"the result should be (.*) on the screen")]
-        public void ThenTheResultShouldBeOnThe_Screen(int p0)
+        [Then(@"the result must be (.*) on the screen")]
+        public void ThenTheResultMustBeCountsOnThe_Screen(string expectedResult)
         {
-            result = googlePage.getResult();
-            Assert.AreEqual("600", result);
-            Console.WriteLine("--------------------------" + result);
+            Assert.AreEqual(expectedResult, googlePage.getResult());
         }
     }
 }

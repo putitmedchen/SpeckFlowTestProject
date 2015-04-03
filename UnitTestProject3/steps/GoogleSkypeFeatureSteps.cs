@@ -10,8 +10,6 @@ namespace UnitTestProject3
 
         private GooglePage googlePage;
         private IWebDriver driver;
-        private String searchWord = "skype";
-
 
         [BeforeScenario()]
         public void setUp()
@@ -26,16 +24,16 @@ namespace UnitTestProject3
             driver.Quit();
         }
 
-                [Given(@"I have entered www\.google\.com for search")]
-        public void GivenIHaveEnteredWww_Google_ComForSearch()
+                [Given(@"I have entered (.*) for search")]
+        public void GivenIHaveEnteredForSearch(string address)
         {
-            googlePage.openBaseUrl();
+            googlePage.openBaseUrl(address);
         }
 
-                [Given(@"I have entered skype")]
-        public void GivenIHaveEnteredSkype()
+                [Given(@"I have entered (.*) in search line")]
+        public void GivenIHaveEnteredSkypeInSearchLine(string search)
         {
-            googlePage.typeSearch(searchWord);
+            googlePage.typeSearch(search);
         }
 
                 [When(@"I press search skype")]
@@ -44,11 +42,10 @@ namespace UnitTestProject3
             googlePage.submitSearch();
         }
 
-                [Then(@"the result should be  counts of search result  on the search list")]
-        public void ThenTheResultShouldBeCountsOfSearchResultOnTheSearchList()
+                [Then(@"the result should be (.*) counts")]
+        public void ThenTheResultShouldBeCounts(int expectedCounts)
         {
-            googlePage.countSearchResult();
-            Console.WriteLine(googlePage.countSearchResult());
+            googlePage.countsSearchResult(expectedCounts);
         }
      }
 }

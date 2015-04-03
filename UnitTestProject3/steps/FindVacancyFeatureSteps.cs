@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Collections.Generic;
 using TechTalk.SpecFlow;
 using UnitTestProject3.pages;
 
@@ -9,11 +10,9 @@ namespace UnitTestProject3
     public class FindVacancyFeatureSteps
     {
 
-
         private CiklumVacancyPage ciklumPage;
         private VacancyPage vacancyPage;
         private IWebDriver driver;
-
 
         [BeforeScenario()]
         public void setUp()
@@ -28,30 +27,37 @@ namespace UnitTestProject3
         {
             driver.Quit();
         }
-               
-                [Given(@"I have entered Ciklum jobs search page")]
-        public void GivenIHaveEnteredCiklumJobsSearchPage()
+
+        [Given(@"I have entered (.*) Ciklum jobs search page")]
+        public void GivenIHaveEnteredCiklumJobsSearchPage(string url)
         {
-            ciklumPage.openBaseUrl();
+            ciklumPage.openUrl(url);
         }
 
-                [Given(@"I found vacancy for which I applied")]
-        public void GivenIFoundVacancyForWhichIApplied()
+        [Given(@"I opened vacancy (.*)")]
+        public void GivenIOpenedVacancy(string vacancy)
         {
-            ciklumPage.findVacancy();
+            ciklumPage.findVacancy(vacancy);
         }
 
-                [When(@"I press Apply for")]
-        public void WhenIPressApplyFor()
+        [When(@"I submitted my application")]
+        public void WhenISubmittedMyApplication()
         {
-            vacancyPage.applyToJob();
+            vacancyPage.submitApplication();
 
         }
 
-                [Then(@"the result should be Error message  on the form")]
-        public void ThenTheResultShouldBeErrorMessageOnTheForm()
+        [Then(@"the result should be Error message  on the form")]
+        public void ThenTheResultShouldBeErrorMessageOnTheForm(Table table)
         {
-            vacancyPage.validateError();
+            List<string> errors = new List<string>();
+
+            foreach (var row in table.Rows)
+            {
+                var error = row["Error message"];
+                errors.Add(error);
+            }
+            vacancyPage.validateErrors(errors);
         }
     }
 }

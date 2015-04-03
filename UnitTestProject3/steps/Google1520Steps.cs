@@ -28,16 +28,16 @@ namespace UnitTestProject3
         }
 
 
-             [Given(@"I have entered www\.google\.com")]
-        public void GivenIHaveEnteredWww_Google_Com()
+             [Given(@"I entered (.*) as base url")]
+        public void GivenIEnteredBaseUrlAsBaseUrl(string baseUrl)
         {
-            googlePage.openBaseUrl();
+            googlePage.openBaseUrl(baseUrl);
         }
 
-                [Given(@"I have entered (.*) into the search line")]
-        public void GivenIHaveEnteredIntoTheSearchLine(string p0)
+                [Given(@"I entered (.*) into the search line")]
+        public void GivenIEnteredIntoTheSearchLine(string search)
         {
-            googlePage.typeSearch("15*20");
+            googlePage.typeSearch(search);
         }
 
                 [When(@"I press on search button")]
@@ -46,10 +46,10 @@ namespace UnitTestProject3
             googlePage.submitSearch();
         }
 
-                [Then(@"the result should be as expected (.*) on the screen")]
-        public void ThenTheResultShouldBeOnTheScreen(int p0)
+            [Then(@"the result should be (.*) on the screen")]
+        public void ThenTheResultShouldBeOnTheScreen(string expectedResult)
         {
-            Assert.AreEqual("300", googlePage.getResult());
+            Assert.AreEqual(expectedResult, googlePage.getResult());
             Console.WriteLine("--------------------------" + googlePage.getResult());
         }
        

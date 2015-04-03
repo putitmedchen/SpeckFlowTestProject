@@ -5,8 +5,8 @@
 
 @mytag
 Scenario: Multiply two numbers
-	Given I have entered www.google.com
-	And I have entered 15*20 into the search line
+	Given I entered www.google.com as base url
+	And I entered 15*20 into the search line 
 	When I press on search button
 	Then the result should be 300 on the screen
 

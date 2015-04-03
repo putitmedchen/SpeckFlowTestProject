@@ -12,7 +12,6 @@ namespace UnitTestProject3
         private BestbuyLandingPage bestbuyLandingPage;
         private IWebDriver driver;
         private string language = "United States - English";
-        private string productName = "surface pro 3";
         private BestBuyHomePage bestbuyHomePage;
 
 
@@ -30,32 +29,32 @@ namespace UnitTestProject3
             driver.Quit();
         }
 
-                [Given(@"I have entered surface pro (.*) into the search")]
-        public void GivenIHaveEnteredSurfaceProIntoTheSearch(int p0)
+        [Given(@"I have opened page (.*)")]
+        public void GivenIHaveOpenedPage(string url)
         {
-            bestbuyLandingPage.openBaseUrl();
+            bestbuyLandingPage.openBaseUrl(url);
             bestbuyLandingPage.chooseLanguage(language);
 
 
         }
 
-                [Given(@"I choose from list surface pro (.*) with price (.*)")]
-        public void GivenIChooseFromListSurfaceProWithPrice(int p0, Decimal p1)
+        [Given(@"I have typed (.*) into the search")]
+        public void GivenIHaveEnteredIntoTheSearch(string productName)
         {
             bestbuyHomePage.search(productName);
-           
+
         }
 
-                [When(@"I press on add to Cart button")]
-        public void WhenIPressOnAddToCartButton()
+        [When(@"I add to cart (.*) with price (.*)")]
+        public void GivenIHaveEnteredIntoTheSearch(string productName, string price)
         {
-            bestbuyHomePage.addToCart();
+            bestbuyHomePage.addProductToCart(productName, price);
         }
 
-                [Then(@"The product should be added  to Cart")]
+        [Then(@"The product should be added  to Cart")]
         public void ThenTheProductShouldBeAddedToCart()
         {
             bestbuyHomePage.checkCart();
         }
-     }
+    }
 }

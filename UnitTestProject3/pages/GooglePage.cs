@@ -1,10 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UnitTestProject3
 {
@@ -12,7 +10,6 @@ namespace UnitTestProject3
     {
 
         private static IWebDriver driver;
-        private String baseUrl = "https://www.google.com";
 
         [FindsBy(How = How.Id, Using = "lst-ib")]
         private IWebElement searchLine;
@@ -23,27 +20,24 @@ namespace UnitTestProject3
         [FindsBy(How = How.Id, Using = "cwos")]
         private IWebElement resultPlaceholder;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='srg']/li")]
+        [FindsBy(How = How.XPath, Using = "//div/h3/a")]
         private IList<IWebElement> searchResults;
 
         public GooglePage(IWebDriver webdriver)
         {
             driver = webdriver;
-            
             PageFactory.InitElements(driver, this);
-
         }
 
-        public void openBaseUrl()
+        public void openBaseUrl(string address)
         {
-            driver.Navigate().GoToUrl(baseUrl);
+            driver.Navigate().GoToUrl("https://" + address);
         }
 
         public void typeSearch(String str)
         {
             searchLine.SendKeys(str);
         }
-
 
         public void submitSearch()
         {
@@ -52,12 +46,20 @@ namespace UnitTestProject3
 
         public String getResult()
         {
+            pause(3000);
             return resultPlaceholder.Text;
         }
 
-        public int countSearchResult()
+        public void countsSearchResult(int expectedCounts)
         {
-            return searchResults.Count;
+
+            Assert.AreEqual(expectedCounts, searchResults.Count);
         }
+
+        public void pause(int miliSeconds)
+        {
+            System.Threading.Thread.Sleep(miliSeconds);
+        }
+        
     }
 }

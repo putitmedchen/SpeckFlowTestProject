@@ -11,7 +11,6 @@ namespace UnitTestProject3.pages
     class BestbuyLandingPage
     {
         private static IWebDriver driver;
-        private String baseUrl = "http://www.bestbuy.com/?intl=nosplash";
 
         [FindsBy(How = How.XPath, Using = "//select[@name='select_locale']/option[contains(text(),'United States - English')]")]
         private IWebElement countryChooser;
@@ -27,9 +26,9 @@ namespace UnitTestProject3.pages
 
         }
 
-        public void openBaseUrl()
+        public void openBaseUrl(string url)
         {
-            driver.Navigate().GoToUrl(baseUrl);
+            driver.Navigate().GoToUrl("http://" + url);
         }
 
         public void chooseLanguage(string language)

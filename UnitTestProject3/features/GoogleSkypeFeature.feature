@@ -6,6 +6,6 @@
 @mytag
 Scenario: Get numbers of search result
 	Given I have entered www.google.com for search
-	And I have entered skype
+	And I have entered skype in search line
 	When I press search skype
-	Then the result should be  counts of search result  on the search list
+	Then the result should be 6 counts 

@@ -15,30 +15,24 @@ namespace UnitTestProject3.pages
     class VacancyPage
     {
         private IWebDriver driver;
-        private string myVacancy = "http://jobs.ciklum.com/jobs/automated-qas-for-e-boks/";
-
-        private string nameError = "ERROR: “Name” is a required field.";
-        private string lastNameError = "ERROR: “Name” is a required field.";
-        private string emailError = "ERROR: “Name” is a required field.";
-
 
         [FindsBy(How = How.XPath, Using = "//form[@class='main_form']/p/input[@class='submit']")]
         private IWebElement submitAplication;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='sr2']/div[2]/a")]
-        private IWebElement applyButton;
-
         [FindsBy(How = How.XPath, Using = "//a[@class='apply apply_online' or @class='apply apply_online active']")]
         private IWebElement applyOnline;
-       
-        [FindsBy(How = How.XPath, Using = "//div[@class='notice error']/span/div[1]")]
-        private IWebElement nameRequired;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='notice error']/span/div[1]")]
-        private IWebElement lastNameRequired;
+        [FindsBy(How = How.XPath, Using = "//span/div[1]")]
+        private IWebElement NameErrorField;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='notice error']/span/div[1]")]
-        private IWebElement emailRequired;
+        [FindsBy(How = How.XPath, Using = "//span/div[2]")]
+        private IWebElement LastNameErrorField;
+
+        [FindsBy(How = How.XPath, Using = "//span/div[3]")]
+        private IWebElement EmailErrorField;
+
+        [FindsBy(How = How.XPath, Using = "//span/div")]
+        private IList<IWebElement> errorsList;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='your_name']")]
         private IWebElement nameField;
@@ -52,31 +46,36 @@ namespace UnitTestProject3.pages
         [FindsBy(How = How.XPath, Using = "//input[@id='your_tel']")]
         private IWebElement phoneField;
 
-        
+
         public VacancyPage(IWebDriver webDriver)
         {
             driver = webDriver;
             PageFactory.InitElements(driver, this);
         }
 
-
-        public  void applyToJob()
-        {
-            pause(8000);
-            applyButton.Click();
-        }
-       
-
-        public void validateError()
+        public void submitApplication()
         {
             applyOnline.Click();
             submitAplication.Click();
-            applyOnline.Click();
 
-            Assert.That(nameError, Is.EqualTo(nameRequired.Text));
-            Assert.That(lastNameError, Is.EqualTo(lastNameRequired.Text));
-            Assert.That(emailError, Is.EqualTo(emailRequired.Text));
-            
+            applyOnline.Click();
+        }
+
+        public void validateErrors(List<string> expectedErrosList)
+        {
+
+            for (int i = 0; i < errorsList.Count; i++)
+            {
+                IWebElement error = errorsList[i];
+                for (int k = i; k < expectedErrosList.Count; k++)
+                {
+                    string expectedError = expectedErrosList[i];
+                    Assert.AreEqual(expectedError, error.Text);
+                    break;
+                }
+
+            }
+
         }
 
         public void pause(int miliSeconds)
@@ -84,14 +83,16 @@ namespace UnitTestProject3.pages
             System.Threading.Thread.Sleep(miliSeconds);
         }
 
-
-        [TestCase("sgo","sgoLast","qwe@mail.ru", "987654321")]
         public void multipleUsersApply(string name, string lastName, string email, string phone)
         {
+            applyOnline.Click();
+
             nameField.SendKeys(name);
             lastNameField.SendKeys(lastName);
             emailField.SendKeys(email);
             phoneField.SendKeys(phone);
+
+            submitAplication.Click();
         }
 
     }

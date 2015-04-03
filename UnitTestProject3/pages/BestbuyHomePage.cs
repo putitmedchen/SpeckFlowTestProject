@@ -19,9 +19,6 @@ namespace UnitTestProject3.pages
         [FindsBy(How = How.XPath, Using = "//button[@title='Search']")]
         private IWebElement searchButton;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='list-item'][//a[contains(text(),'Surface Pro 3')] and .//span[@class='regular-price' and contains(text(),'$999.99')]]//span[@class='label-add-to-cart']")]
-        private IWebElement product;
-
         [FindsBy(How = How.XPath, Using = "//div[@class='count-container']/span[@class='count']")]
         private IWebElement cartElements;
 
@@ -37,16 +34,14 @@ namespace UnitTestProject3.pages
             searchButton.Click();
         }
 
-        public void addToCart()
+        public void addProductToCart(string productName, string price)
         {
-            product.Click();
-            
+            driver.FindElement(By.XPath("//div[@class='list-item'][//a[contains(text(),'" + productName + "')] and .//div[@class='medium-item-price'] and contains(text(),'" + price + "')]]//span[@class='label-add-to-cart']"));
         }
 
         public void checkCart()
         {
             Assert.AreEqual(1, int.Parse(cartElements.Text));
         }
-
     }
 }

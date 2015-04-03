@@ -78,10 +78,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="steps\ApplyToJobFromMultipleUsersFeatureSteps.cs" />
     <Compile Include="features\SearchOnBestbuyFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchOnBestbuyFeature.feature</DependentUpon>
+    </Compile>
+    <Compile Include="features\ApplyFromMultipleUsers1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplyFromMultipleUsers.feature</DependentUpon>
     </Compile>
     <Compile Include="pages\VacancyPage.cs" />
     <Compile Include="steps\SearchOnBestbuyFeatureSteps.cs" />
@@ -124,6 +130,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchOnBestbuyFeature.feature.cs</LastGenOutput>
     </None>
+    <None Include="features\ApplyFromMultipleUsers.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ApplyFromMultipleUsers1.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="features\Google1520.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -142,6 +152,7 @@
       <LastGenOutput>FindVacancyFeature.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

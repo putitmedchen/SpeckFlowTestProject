@@ -75,11 +75,11 @@ namespace UnitTestProject3.Features
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("I have entered surface pro 3 into the search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have opened page www.bestbuy.com/?intl=nosplash", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.And("I choose from list surface pro 3 with price 999.99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I have typed Surface pro 3 into the search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.When("I press on add to Cart button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I add to cart Surface pro 3 with price 999.99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
  testRunner.Then("The product should be added  to Cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

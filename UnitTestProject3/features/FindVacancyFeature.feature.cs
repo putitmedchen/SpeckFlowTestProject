@@ -32,7 +32,7 @@ namespace UnitTestProject3.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "FindVacancyFeature", "\nI want to find vacancy for which I applied", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "FindVacancyFeature", "\r\nI want to find vacancy for which I applied", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,13 +74,26 @@ namespace UnitTestProject3.Features
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("I have entered Ciklum jobs search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have entered jobs.ciklum.com/search-and-apply/ Ciklum jobs search page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.And("I found vacancy for which I applied", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I opened vacancy Automated QAs for e-Boks", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.When("I press Apply for", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I submitted my application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Error type",
+                        "Error message"});
+            table1.AddRow(new string[] {
+                        "Name",
+                        "ERROR: “Name” is a required field."});
+            table1.AddRow(new string[] {
+                        "LastName",
+                        "ERROR: “Last Name” is a required field."});
+            table1.AddRow(new string[] {
+                        "Email",
+                        "ERROR: “Email” is a required field."});
 #line 10
- testRunner.Then("the result should be Error message  on the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the result should be Error message  on the form", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

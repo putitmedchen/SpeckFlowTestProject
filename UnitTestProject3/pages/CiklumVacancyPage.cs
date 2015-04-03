@@ -13,7 +13,6 @@ namespace UnitTestProject3.pages
     {
         
         private IWebDriver driver;
-        private String baseUrl = "http://jobs.ciklum.com/search-and-apply/";
 
         [FindsBy(How = How.XPath, Using = "//select[@name='location']")]
         private IWebElement allOffices;
@@ -21,9 +20,6 @@ namespace UnitTestProject3.pages
         [FindsBy(How = How.XPath, Using = "//button[@title='search']")]
         private IWebElement searchButton;
 
-        [FindsBy(How = How.XPath, Using = ".//*[@id='sr2']/div[2]/a")]
-        private IWebElement applyButton;
-      
         [FindsBy(How = How.XPath, Using = "//div[@class='srg']/li")]
         private IList<IWebElement> searchResults;
 
@@ -31,22 +27,27 @@ namespace UnitTestProject3.pages
         {
             driver = webdriver;
             PageFactory.InitElements(driver, this);
-
         }
 
-
-        public void openBaseUrl()
+        public void openUrl(string url)
         {
-            driver.Navigate().GoToUrl(baseUrl);
+            driver.Navigate().GoToUrl("http://" + url);
         }
 
-        public void findVacancy()
+        public void findVacancy(string vacancyName)
         {
             allOffices.FindElement(By.Name("Lviv")).Click();
             searchButton.Click();
+
+            pause(7000);
+
+            driver.FindElement(By.XPath("//a[contains(text(),'" + vacancyName + "')]")).Click();
         }
 
-        
+        public void pause(int miliSeconds)
+        {
+            System.Threading.Thread.Sleep(miliSeconds);
+        }
 
     }
 }
